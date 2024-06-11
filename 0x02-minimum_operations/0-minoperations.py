@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-Main file for calculating minimum operations to reach n characters
-starting from a single character "A"
+Main file for calculating minimum operations to reach n characters starting
+from a single character "A"
 """
 
 
@@ -17,11 +17,12 @@ def minOperations(n: int) -> int:
     """
     if n <= 1:
         return 0
+
     ops = 0
-    while 1 < n:
+    current = 1
+    while current < n:
         for i in range(2, n + 1):
             while n % i == 0:
                 ops += i
                 n //= i
-                print(f"ops: {ops}, i: {i}, n: {n}\n")
     return ops
