@@ -25,4 +25,5 @@ def minOperations(n: int) -> int:
             while n % i == 0:
                 ops += i
                 n //= i
+                print(f"ops: {ops}, i: {i}, n: {n}\n")
     return ops
