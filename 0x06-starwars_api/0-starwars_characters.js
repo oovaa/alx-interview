@@ -1,27 +1,20 @@
 #!/usr/bin/node
 
-import fetch from 'node-fetch';
+import request from 'request';
 
-const movieId = process.argv[2];
-
-async function fetchData (movieId = 3) {
-  const URL = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
-
-  const res = await fetch(URL);
-
-  const resJson = await res.json();
-
-  // console.log(resJson['characters'])
-  const charactersList = resJson.characters;
-
-  for (const characterURL of charactersList) {
-    // console.log(characterURL)
-    const charactersREQ = await fetch(characterURL);
-    const charactersJSON = await charactersREQ.json();
-    // console.log(charactersJSON)
-    const charactersNAME = charactersJSON.name;
-    console.log(charactersNAME);
+request(
+  'https://swapi-api.hbtn.io/api/films/' + process.argv[2],
+  function (err, res, body) {
+    if (err) throw err;
+    const actors = JSON.parse(body).characters;
+    exactOrder(actors, 0);
   }
-}
-
-fetchData(movieId).catch(console.error); // Added catch to handle potential errors
+);
+const exactOrder = (actors, x) => {
+  if (x === actors.length) return;
+  request(actors[x], function (err, res, body) {
+    if (err) throw err;
+    console.log(JSON.parse(body).name);
+    exactOrder(actors, x + 1);
+  });
+};
