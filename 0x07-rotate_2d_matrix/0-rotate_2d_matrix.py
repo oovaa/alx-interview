@@ -1,13 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 
-from typing import List
-
-from numpy import mat
-from regex import B
-
-
-def rotate_2d_matrix(matrix: List[List[int]]):
+def rotate_2d_matrix(matrix):
     """
     Rotates a given 2D matrix 90 degrees clockwise in-place.
 
