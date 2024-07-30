@@ -13,22 +13,23 @@ def island_perimeter(grid):
     Return:
         the perimeter of the island
     """
-
     n = len(grid)
+    m = len(grid[0])
     count = 0
 
     for row in range(n):
-        for col in range(n):
-            if grid[row][col]:
-
-                # check above and below
-                if row > 0 and grid[row - 1][col] == 0:
+        for col in range(m):
+            if grid[row][col] == 1:
+                # check above
+                if row == 0 or grid[row - 1][col] == 0:
                     count += 1
-                if row < n and grid[row + 1][col] == 0:
+                # check below
+                if row == n - 1 or grid[row + 1][col] == 0:
                     count += 1
-                # check sides
-                if col > 0 and grid[row][col - 1] == 0:
+                # check left
+                if col == 0 or grid[row][col - 1] == 0:
                     count += 1
-                if col < n and grid[row][col + 1] == 0:
+                # check right
+                if col == m - 1 or grid[row][col + 1] == 0:
                     count += 1
     return count
